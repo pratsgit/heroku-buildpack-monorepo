@@ -12,11 +12,18 @@ CACHE_DIR="$2"
 ENV_DIR="$3"
 STAGE="$(mktemp -d)"
 
+echo "build dir is ${BUILD_DIR}"
+echo "cache dir is ${CACHE_DIR}"
+echo "env dir is ${ENV_DIR}"
+echo "env dir and app base is ${ENV_DIR}/${APP_BASE}"
+echo "stage is ${STAGE}"
+
 if [ ! -f "${ENV_DIR}/APP_BASE" ]; then
     echo "APP_BASE was not set. Aborting" | indent
     exit 1
 fi
 APP_BASE="$(cat "${ENV_DIR}/APP_BASE")"
+echo "APP_BASE from cat is ${APP_BASE}"
 
 (
     mv "${BUILD_DIR}/${APP_BASE}" "${STAGE}" &&
